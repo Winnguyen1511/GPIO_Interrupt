@@ -703,7 +703,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
 
     printf("gpionum=%d\n", gpionum);
     printf("edge=%d\n", edge);
-    int size;
+    int size=0;
     if(edge == FALLING)
         size = 7;
     else if(edge == RISING)
@@ -721,6 +721,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
     strcat(path, EDGE);
         //printf("%s\n", path);
     char str_val[size];
+    
     fd = open(path, FILE_FLAGS, FILE_PERMS);
     if(fd == -1)
     {
@@ -823,7 +824,7 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
 
     int dir = (num & HIGH_HALF) >> 16;
     printf("dir=%d\n", dir);
-    int size;
+    int size= 0;
     if(dir == OUTPUT)
         size = 3;
     else if(dir == INPUT)
