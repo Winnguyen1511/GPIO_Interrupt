@@ -213,7 +213,7 @@ int GPIO_set_edge(GPIO_t* instance, edge_t ed)
 
 int GPIO_get_edge(GPIO_t* instance, edge_t* retVal)
 {
-    if(!ioctl_cmd(instance, SET_EDGE_CMD, retVal))
+    if(!ioctl_cmd(instance, GET_EDGE_CMD, retVal))
     {
         printf("Error: ioctl cmd get edge gpio%d\n", instance->gpio_num);
         return ERROR;
