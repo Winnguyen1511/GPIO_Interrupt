@@ -714,20 +714,20 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
         return ERROR;
     }
     printf("%s\n", str_val);
-    if(strcmp(str_val, "falling\n") == 0)
+    if(strcmp(str_val, "falling") == 0)
     {
         *val = FALLING;
     }
     else if(strcmp(str_val, "rising\n") == 0)
     {
-        printf("here\n");
+        //printf("here\n");
         *val = RISING;
     }
-    else if(strcmp(str_val, "none\n") == 0)
+    else if(strcmp(str_val, "none\n\n\n") == 0)
     {
         *val = NONE;
     }
-    else if(strcmp(str_val, "both\n") == 0)
+    else if(strcmp(str_val, "both\n\n\n") == 0)
     {
         *val = BOTH;
     }
@@ -825,7 +825,7 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
     {
         *val = OUTPUT;
     }
-    else if(strcmp(str_val, "in") == 0)
+    else if(strcmp(str_val, "in\n") == 0)
     {
         *val = INPUT;
     }
