@@ -606,15 +606,18 @@ int ioctl_cmd_set_dir(int num, direction_t dir)
     strcat(path, name);
     strcat(path, DIRECTION);
     //printf("%s\n", path);
-    char str_val[3] = {0};
+    //char str_val[3] = {0};
+    char *str_val;
     if(dir == OUTPUT)
     {
         size = 3;
+        str_val = (char*)malloc(size*sizeof(char));
         strcat(str_val, "out");
     }
     else if(dir == INPUT)
     {
         size = 2;
+        str_val = (char*)malloc(size*sizeof(char));
         strcat(str_val, "in");
     }
     else
@@ -652,25 +655,29 @@ int fd, size;
     strcat(path, name);
     strcat(path, EDGE);
     //printf("%s\n", path);
-    char str_val[7] = {0};
+    char* str_val;
     if(ed == NONE)
     {
         size = 4;
+        str_val = (char*)malloc(size*sizeof(char));
         strcat(str_val, "none");
     }
     else if(ed == RISING)
     {
         size = 6;
+        str_val = (char*)malloc(size*sizeof(char));
         strcat(str_val, "rising");
     }
     else if(ed == FALLING)
     {
         size = 7;
+        str_val = (char*)malloc(size*sizeof(char));
         strcat(str_val, "falling");
     }
     else if(ed == BOTH)
     {
         size = 4;
+        str_val = (char*)malloc(size*sizeof(char));
         strcat(str_val, "both");
     }
     else
@@ -721,7 +728,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
     strcat(path, EDGE);
         //printf("%s\n", path);
     char str_val[size];
-    
+
     fd = open(path, FILE_FLAGS, FILE_PERMS);
     if(fd == -1)
     {
