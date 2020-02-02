@@ -611,13 +611,13 @@ int ioctl_cmd_set_dir(int num, direction_t dir)
     if(dir == OUTPUT)
     {
         size = 3;
-        str_val = (char*)malloc(size*sizeof(char));
+        str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "out");
     }
     else if(dir == INPUT)
     {
         size = 2;
-        str_val = (char*)malloc(size*sizeof(char));
+        str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "in");
     }
     else
@@ -659,25 +659,25 @@ int fd, size;
     if(ed == NONE)
     {
         size = 4;
-        str_val = (char*)malloc(size*sizeof(char));
+        str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "none");
     }
     else if(ed == RISING)
     {
         size = 6;
-        str_val = (char*)malloc(size*sizeof(char));
+        str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "rising");
     }
     else if(ed == FALLING)
     {
         size = 7;
-        str_val = (char*)malloc(size*sizeof(char));
+        str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "falling");
     }
     else if(ed == BOTH)
     {
         size = 4;
-        str_val = (char*)malloc(size*sizeof(char));
+        str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "both");
     }
     else
