@@ -38,8 +38,8 @@ int main(int argc, char** argv)
     struct pollfd fdset;
     for(;;)
     {
-        fdset.fd = open("/sys/class/gpio/gpio17/value", O_RDONLY);
-        fdset.events = POLLPRI;
+        fdset.fd = open("/sys/class/gpio/gpio17/value", O_RDWR);
+        fdset.events = POLLPRI | POLLERR;
         fdset.revents = 0;
         int rc = poll(&fdset, 1, 5000);
         if(rc < 0)
@@ -51,7 +51,7 @@ int main(int argc, char** argv)
         {
             printf(".");
         }
-        if(fdset.revents & POLLPRI)
+        if(fdset.revents & (POLLPRI | POLLERR))
         {
             lseek(fdset.fd, 0, SEEK_SET);
             int val = 0;
