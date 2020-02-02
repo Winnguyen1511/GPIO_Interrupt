@@ -435,7 +435,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             ret = (ioctl_cmd_set_edge(instance->gpio_num, *((edge_t*)val)))? SUCCESS : ERROR;
             if(ret == SUCCESS)
             {
-                printf("here\n");
+                printf("here set\n");
                 instance->edge = *((edge_t*)val);
             }
             break;
@@ -467,7 +467,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             ret = (ioctl_cmd_get_edge(instance->gpio_num, (edge_t*)val))? SUCCESS : ERROR;
             if(ret == SUCCESS)
             {
-                printf("here\n");
+                printf("here get\n");
                 if(instance->edge != *(edge_t*)val);
                 ret = ERROR;
             }
@@ -654,7 +654,6 @@ int fd, size;
     else if(ed == RISING)
     {
         size = 6;
-        printf("here\n");
         strcat(str_val, "rising");
     }
     else if(ed == FALLING)
@@ -720,6 +719,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
     }
     else if(strcmp(str_val, "rising") == 0)
     {
+        printf("here\n");
         *val = RISING;
     }
     else if(strcmp(str_val, "none") == 0)
