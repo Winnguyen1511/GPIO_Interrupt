@@ -628,6 +628,7 @@ int ioctl_cmd_set_dir(int num, direction_t dir)
     
         
     //fprintf(str_val, "%d", (int)val);
+    printf("set dir: %s\n", str_val);
     fd = open(path, FILE_FLAGS, FILE_PERMS);
     if(fd == -1)
     {
@@ -689,6 +690,7 @@ int fd, size;
 
         
     //fprintf(str_val, "%d", (int)val);
+    printf("set edge: %s\n", str_val);
     fd = open(path, FILE_FLAGS, FILE_PERMS);
     if(fd == -1)
     {
