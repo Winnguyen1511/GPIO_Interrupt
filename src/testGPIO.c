@@ -38,7 +38,7 @@ int main(int argc, char** argv)
     struct pollfd fdset;
     for(;;)
     {
-        fdset.fd = open("/sys/class/gpio/gpio17/value", O_RDWR);
+        fdset.fd = open("/sys/class/gpio/gpio17/value", O_RDONLY);
         fdset.events = POLLPRI;
         fdset.revents = 0;
         int rc = poll(&fdset, 1, 5000);
