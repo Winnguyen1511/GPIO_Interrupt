@@ -635,7 +635,7 @@ int ioctl_cmd_set_dir(int num, direction_t dir)
         printf("Error: ioctl cmd set dir open file\n");
         return ERROR;
     }
-    if(write(fd, str_val, size) != size)
+    if(write(fd, str_val, size-1) != size-1)
     {
         printf("Error : ioctl cmd set dir write file\n");
         return ERROR;
@@ -697,7 +697,7 @@ int fd, size;
         printf("Error: ioctl cmd set edge open file\n");
         return ERROR;
     }
-    if(write(fd, str_val, size) != size)
+    if(write(fd, str_val, size-1) != size-1)
     {
         printf("Error : ioctl cmd set edge write file\n");
         return ERROR;
@@ -738,7 +738,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
         printf("Error: ioctl cmd get edge open file\n");
         return ERROR;
     }
-    if(read(fd, str_val, size) != size)
+    if(read(fd, str_val, size-1) != size-1)
     {
         printf("Error : ioctl cmd get edge read file\n");
         return ERROR;
@@ -857,7 +857,7 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
         printf("Error: ioctl cmd get dir open file\n");
         return ERROR;
     }
-    if(read(fd, str_val, size) != size)
+    if(read(fd, str_val, size-1) != size-1)
     {
         printf("Error : ioctl cmd get dir write file\n");
         return ERROR;
