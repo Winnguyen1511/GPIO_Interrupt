@@ -77,7 +77,7 @@ int GPIO_Init_Custom(GPIO_t* instance,\
         printf("Error: Cannot set direction gpio%d\n", instance->gpio_num);
         return ERROR;
     }
-    printf("Init edge=%d\n", ed);
+    //printf("Init edge=%d\n", ed);
     if(!GPIO_set_edge(instance, ed))
     {
         printf("Error: Cannot set edge gpio%d\n", instance->gpio_num);
@@ -437,7 +437,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             ret = (ioctl_cmd_set_edge(instance->gpio_num, *((edge_t*)val)))? SUCCESS : ERROR;
             if(ret == SUCCESS)
             {
-                printf("here set\n");
+                //printf("here set\n");
                 instance->edge = *((edge_t*)val);
             }
             break;
@@ -469,12 +469,12 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             break;
         case GET_EDGE_CMD:
             tmpNum = instance->gpio_num;
-            printf("ioclt edge=%d\n", instance->edge);
+            //printf("ioclt edge=%d\n", instance->edge);
             tmpNum += (int)(instance->edge) << 16;
             ret = (ioctl_cmd_get_edge(tmpNum, (edge_t*)val))? SUCCESS : ERROR;
             if(ret == SUCCESS)
             {
-                printf("here get\n");
+                //printf("here get\n");
                 if(instance->edge != *(edge_t*)val);
                 ret = ERROR;
             }
@@ -628,7 +628,7 @@ int ioctl_cmd_set_dir(int num, direction_t dir)
     
         
     //fprintf(str_val, "%d", (int)val);
-    printf("set dir: %s\n", str_val);
+    //printf("set dir: %s\n", str_val);
     fd = open(path, FILE_FLAGS, FILE_PERMS);
     if(fd == -1)
     {
@@ -690,7 +690,7 @@ int fd, size;
 
     
     //fprintf(str_val, "%d", (int)val);
-    printf("set edge: %s\n", str_val);
+    //printf("set edge: %s\n", str_val);
     fd = open(path, FILE_FLAGS, FILE_PERMS);
     if(fd == -1)
     {
@@ -711,8 +711,8 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
     int gpionum = num & LOW_HALF;
     int edge = (num & HIGH_HALF) >> 16;
 
-    printf("gpionum=%d\n", gpionum);
-    printf("edge=%d\n", edge);
+    //printf("gpionum=%d\n", gpionum);
+    //printf("edge=%d\n", edge);
     int size=0;
     if(edge == FALLING)
         size = 8;
@@ -744,7 +744,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
         return ERROR;
     }
     str_val[size-1] = '\0';
-    printf("%s\n", str_val);
+    //printf("%s\n", str_val);
     if(strcmp(str_val, "falling") == 0)
     {
         *val = FALLING;
@@ -831,10 +831,10 @@ int ioctl_cmd_get_value(int num, gpio_value_t* val)
 int ioctl_cmd_get_dir(int num, direction_t* val)
 {
     int gpionum = num & LOW_HALF;
-    printf("gpionum=%d\n", gpionum);
+    //printf("gpionum=%d\n", gpionum);
 
     int dir = (num & HIGH_HALF) >> 16;
-    printf("dir=%d\n", dir);
+    //printf("dir=%d\n", dir);
     int size= 0;
     if(dir == OUTPUT)
         size = 4;
@@ -864,7 +864,7 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
         return ERROR;
     }
     str_val[size-1] = '\0';
-    printf("%s\n", str_val);
+    //printf("%s\n", str_val);
     if(strcmp(str_val, "out") == 0)
     {
         *val = OUTPUT;
