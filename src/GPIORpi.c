@@ -606,17 +606,17 @@ int ioctl_cmd_set_dir(int num, direction_t dir)
     strcat(path, name);
     strcat(path, DIRECTION);
     //printf("%s\n", path);
-    char str_val[3] = {0};
+    char str_val[4] = {0};
     //char *str_val;
     if(dir == OUTPUT)
     {
-        size = 3;
+        size = 4;
         //str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "out");
     }
     else if(dir == INPUT)
     {
-        size = 2;
+        size = 3;
         //str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "in");
     }
@@ -657,28 +657,28 @@ int fd, size;
     strcat(path, EDGE);
     //printf("%s\n", path);
     //char* str_val;
-    char str_val[7] = {0};
+    char str_val[8] = {0};
     if(ed == NONE)
     {
-        size = 4;
+        size = 5;
         //str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "none");
     }
     else if(ed == RISING)
     {
-        size = 6;
+        size = 7;
         //str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "rising");
     }
     else if(ed == FALLING)
     {
-        size = 7;
+        size = 8;
         //str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "falling");
     }
     else if(ed == BOTH)
     {
-        size = 4;
+        size = 5;
         //str_val = (char*)malloc((size+1)*sizeof(char));
         strcat(str_val, "both");
     }
@@ -715,11 +715,11 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
     printf("edge=%d\n", edge);
     int size=0;
     if(edge == FALLING)
-        size = 7;
+        size = 8;
     else if(edge == RISING)
-        size = 6;
+        size = 7;
     else if(edge == NONE || edge == BOTH)
-        size = 4;
+        size = 5;
     int fd;
     char name[MAX_NAME_SIZE] = {0}, number_char[MAX_PIN_SIZE] ={0};
     strcat(name, GPIO_PREFIX);
@@ -836,9 +836,9 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
     printf("dir=%d\n", dir);
     int size= 0;
     if(dir == OUTPUT)
-        size = 3;
+        size = 4;
     else if(dir == INPUT)
-        size = 2;
+        size = 3;
     
     int fd;
     char name[MAX_NAME_SIZE] = {0}, number_char[MAX_PIN_SIZE] ={0};
