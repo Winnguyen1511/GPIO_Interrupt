@@ -61,6 +61,7 @@ int main(int argc, char** argv)
         }
         fflush(stdout);
     }
+    //hello
     GPIO_Denit(&gpio17);
     return SUCCESS;
 }
