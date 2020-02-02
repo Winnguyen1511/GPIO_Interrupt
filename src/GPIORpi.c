@@ -688,7 +688,7 @@ int fd, size;
         return ERROR;
     }
 
-        
+    
     //fprintf(str_val, "%d", (int)val);
     printf("set edge: %s\n", str_val);
     fd = open(path, FILE_FLAGS, FILE_PERMS);
@@ -743,6 +743,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
         printf("Error : ioctl cmd get edge read file\n");
         return ERROR;
     }
+    str_val[size-1] = '\0';
     printf("%s\n", str_val);
     if(strcmp(str_val, "falling") == 0)
     {
@@ -862,6 +863,7 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
         printf("Error : ioctl cmd get dir write file\n");
         return ERROR;
     }
+    str_val[size-1] = '\0';
     printf("%s\n", str_val);
     if(strcmp(str_val, "out") == 0)
     {
