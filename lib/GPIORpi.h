@@ -24,6 +24,9 @@
 #define TRUE        1
 #define FALSE       0
 
+#define HIGH_HALF   0xFFFF0000
+#define LOW_HALF    0x0000FFFF
+
 typedef enum export_enum{UNEXPORTED =0, EXPORTED}export_t;
 typedef enum direction_enum{OUTPUT=0, INPUT}direction_t;
 typedef enum active_low_enum{HIGH_ACTIVE=0, LOW_ACTIVE}active_low_t;

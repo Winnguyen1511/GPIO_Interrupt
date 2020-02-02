@@ -384,6 +384,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
     {
         export_t    tmpExport;
         direction_t tmp;
+        int tmpNum;
         int dir_exist = ioctl_is_exported(instance->gpio_num);
         if(dir_exist == TRUE)
             tmpExport = EXPORTED;
@@ -440,7 +441,9 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             }
             break;
         case GET_DIR_CMD:
-            ret = (ioctl_cmd_get_dir(instance->gpio_num, (direction_t*)val))? SUCCESS : ERROR;
+            tmpNum = instance->gpio_num;
+            tmpNum += (int)instance->direction << 16;
+            ret = (ioctl_cmd_get_dir(tmpNum, (direction_t*)val))? SUCCESS : ERROR;
             if(ret == SUCCESS)
             {
                 if(instance->direction != *(direction_t*)val)
@@ -464,7 +467,9 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             }
             break;
         case GET_EDGE_CMD:
-            ret = (ioctl_cmd_get_edge(instance->gpio_num, (edge_t*)val))? SUCCESS : ERROR;
+            tmpNum = instance->gpio_num;
+            tmpNum += (int)instance->edge << 16;
+            ret = (ioctl_cmd_get_edge(tmpNum, (edge_t*)val))? SUCCESS : ERROR;
             if(ret == SUCCESS)
             {
                 printf("here get\n");
@@ -691,7 +696,16 @@ int fd, size;
 
 int ioctl_cmd_get_edge(int num, edge_t* val)
 {
-    int fd, size = 7;
+    int gpionum = num & LOW_HALF;
+    int edge = (num & HIGH_HALF) >> 16;
+    int size;
+    if(edge == FALLING)
+        size = 7;
+    else if(edge == RISING)
+        size = 6;
+    else if(edge == NONE || edge == BOTH)
+        size = 4;
+    int fd;
     char name[MAX_NAME_SIZE] = {0}, number_char[MAX_PIN_SIZE] ={0};
     strcat(name, GPIO_PREFIX);
     sprintf(number_char, "%d", num);
@@ -723,11 +737,11 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
         //printf("here\n");
         *val = RISING;
     }
-    else if(strcmp(str_val, "none\n\n\n") == 0)
+    else if(strcmp(str_val, "none") == 0)
     {
         *val = NONE;
     }
-    else if(strcmp(str_val, "both\n\n\n") == 0)
+    else if(strcmp(str_val, "both") == 0)
     {
         *val = BOTH;
     }
@@ -799,7 +813,15 @@ int ioctl_cmd_get_value(int num, gpio_value_t* val)
 
 int ioctl_cmd_get_dir(int num, direction_t* val)
 {
-    int fd, size = 3;
+    int gpionum = num & LOW_HALF;
+    int dir = (num & HIGH_HALF) >> 16;
+    int size;
+    if(dir == OUTPUT)
+        size = 3;
+    else if(dir == INPUT)
+        size = 2;
+    
+    int fd;
     char name[MAX_NAME_SIZE] = {0}, number_char[MAX_PIN_SIZE] ={0};
     strcat(name, GPIO_PREFIX);
     sprintf(number_char, "%d", num);
@@ -825,7 +847,7 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
     {
         *val = OUTPUT;
     }
-    else if(strcmp(str_val, "in\n") == 0)
+    else if(strcmp(str_val, "in") == 0)
     {
         *val = INPUT;
     }
