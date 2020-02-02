@@ -77,7 +77,7 @@ int GPIO_Init_Custom(GPIO_t* instance,\
         printf("Error: Cannot set direction gpio%d\n", instance->gpio_num);
         return ERROR;
     }
-
+    printf("Init edge=%d\n", ed);
     if(!GPIO_set_edge(instance, ed))
     {
         printf("Error: Cannot set edge gpio%d\n", instance->gpio_num);
@@ -468,6 +468,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             break;
         case GET_EDGE_CMD:
             tmpNum = instance->gpio_num;
+            printf("ioclt edge=%d\n", instance->edge);
             tmpNum += (int)(instance->edge) << 16;
             ret = (ioctl_cmd_get_edge(tmpNum, (edge_t*)val))? SUCCESS : ERROR;
             if(ret == SUCCESS)
@@ -699,8 +700,8 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
     int gpionum = num & LOW_HALF;
     int edge = (num & HIGH_HALF) >> 16;
 
-        printf("gpionum=%d\n", gpionum);
-            printf("edge=%d\n", edge);
+    printf("gpionum=%d\n", gpionum);
+    printf("edge=%d\n", edge);
     int size;
     if(edge == FALLING)
         size = 7;
