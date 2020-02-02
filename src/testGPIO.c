@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "GPIORpi.h"
 #include <unistd.h>
+#include <sys/poll.h>
+
 int main(int argc, char** argv)
 {
     gpio_value_t tmpVal;
@@ -33,7 +35,30 @@ int main(int argc, char** argv)
     // printf("num=%d, active_low=%d, dir=%d, value=%d\n",\
 	//         gpio17.gpio_num, gpio17.active_low, gpio17.direction, gpio17.value);
     // sleep(2);
-
+    struct pollfd fdset;
+    for(;;)
+    {
+        fdset.fd = open("/sys/class/gpio/gpio17/value", O_RDWR);
+        fdset.events = POLLPRI;
+        fdset.revents = 0;
+        int rc = poll(&fdset, 1, 5000);
+        if(rc < 0)
+        {
+            printf("poll failed\n");
+            return -1;
+        }
+        if(rc == 0)
+        {
+            printf(".");
+        }
+        if(fdset.revents & POLLPRI)
+        {
+            lseek(fdset.fd, 0, SEEK_SET);
+            int val = 0;
+            GPIO_get_value(&gpio17, &val);
+            printf("interrupted %d\n", val);
+        }
+    }
     GPIO_Denit(&gpio17);
     return SUCCESS;
 }
