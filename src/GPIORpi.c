@@ -698,6 +698,9 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
 {
     int gpionum = num & LOW_HALF;
     int edge = (num & HIGH_HALF) >> 16;
+
+        printf("gpionum=%d\n", gpionum);
+            printf("edge=%d\n", edge);
     int size;
     if(edge == FALLING)
         size = 7;
@@ -732,7 +735,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
     {
         *val = FALLING;
     }
-    else if(strcmp(str_val, "rising\n") == 0)
+    else if(strcmp(str_val, "rising") == 0)
     {
         //printf("here\n");
         *val = RISING;
@@ -814,7 +817,10 @@ int ioctl_cmd_get_value(int num, gpio_value_t* val)
 int ioctl_cmd_get_dir(int num, direction_t* val)
 {
     int gpionum = num & LOW_HALF;
+    printf("gpionum=%d\n", gpionum);
+
     int dir = (num & HIGH_HALF) >> 16;
+    printf("dir=%d\n", dir);
     int size;
     if(dir == OUTPUT)
         size = 3;
