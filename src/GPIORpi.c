@@ -442,7 +442,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             break;
         case GET_DIR_CMD:
             tmpNum = instance->gpio_num;
-            tmpNum += (int)instance->direction << 16;
+            tmpNum += (int)(instance->direction) << 16;
             ret = (ioctl_cmd_get_dir(tmpNum, (direction_t*)val))? SUCCESS : ERROR;
             if(ret == SUCCESS)
             {
@@ -468,7 +468,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             break;
         case GET_EDGE_CMD:
             tmpNum = instance->gpio_num;
-            tmpNum += (int)instance->edge << 16;
+            tmpNum += (int)(instance->edge) << 16;
             ret = (ioctl_cmd_get_edge(tmpNum, (edge_t*)val))? SUCCESS : ERROR;
             if(ret == SUCCESS)
             {
@@ -708,7 +708,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
     int fd;
     char name[MAX_NAME_SIZE] = {0}, number_char[MAX_PIN_SIZE] ={0};
     strcat(name, GPIO_PREFIX);
-    sprintf(number_char, "%d", num);
+    sprintf(number_char, "%d", gpionum);
     strcat(name, number_char);
     char path[MAX_PATH_SIZE]={0};
     strcat(path, GPIO_PATH);
@@ -824,7 +824,7 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
     int fd;
     char name[MAX_NAME_SIZE] = {0}, number_char[MAX_PIN_SIZE] ={0};
     strcat(name, GPIO_PREFIX);
-    sprintf(number_char, "%d", num);
+    sprintf(number_char, "%d", gpionum);
     strcat(name, number_char);
     char path[MAX_PATH_SIZE]={0};
     strcat(path, GPIO_PATH);
