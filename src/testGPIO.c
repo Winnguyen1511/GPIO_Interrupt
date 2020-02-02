@@ -42,7 +42,7 @@ int main(int argc, char** argv)
         fdset.fd = open("/sys/class/gpio/gpio17/value", O_RDWR);
         fdset.events = POLLPRI | POLLERR;
         fdset.revents = 0;
-        int rc = poll(&fdset, 1, 5000);
+        int rc = poll(&fdset, 0, 5000);
         if(rc < 0)
         {
             printf("poll failed\n");
