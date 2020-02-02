@@ -422,7 +422,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
                 ret = ERROR;
                 break;
             }
-            if(tmp == OUTPUT)
+            if(tmp == INPUT)
             {
                 ret = SUCCESS;
                 break;
