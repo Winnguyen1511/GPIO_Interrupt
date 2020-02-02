@@ -81,7 +81,7 @@ int ioctl_cmd_unexport(int num);
 int ioctl_cmd_set_active_low(int num, active_low_t val);
 int ioctl_cmd_set_dir(int num, direction_t dir);
 int ioctl_cmd_set_value(int num, gpio_value_t val);
-int ioclt_cmd_set_edge(int num, edge_t ed);
+int ioctl_cmd_set_edge(int num, edge_t ed);
 
 int ioctl_cmd_get_value(int num, gpio_value_t* val);
 int ioctl_cmd_get_dir(int num, direction_t* val);

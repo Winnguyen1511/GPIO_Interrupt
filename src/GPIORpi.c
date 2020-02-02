@@ -383,6 +383,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
     else
     {
         export_t    tmpExport;
+        direction_t tmp;
         int dir_exist = ioctl_is_exported(instance->gpio_num);
         if(dir_exist == TRUE)
             tmpExport = EXPORTED;
@@ -412,7 +413,7 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             } 
             break;
         case SET_VALUE_CMD:
-            direction_t tmp;
+            
             if(!ioctl_cmd_get_dir(instance->gpio_num, &tmp))
             {
                 printf("Error: Cannot detect input/output\n");
@@ -630,7 +631,7 @@ int ioctl_cmd_set_dir(int num, direction_t dir)
     return SUCCESS;
 }
 
-int ioclt_cmd_set_edge(int num, edge_t ed)
+int ioctl_cmd_set_edge(int num, edge_t ed)
 {
 int fd, size;
     char name[MAX_NAME_SIZE] = {0}, number_char[MAX_PIN_SIZE] ={0};
