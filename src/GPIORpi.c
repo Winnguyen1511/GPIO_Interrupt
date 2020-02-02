@@ -760,7 +760,7 @@ int ioctl_cmd_set_value(int num, gpio_value_t val)
     }
     if(write(fd, str_val, 1) != 1)
     {
-        printf("Error : ioctl set value write file\n");
+        printf("Error : ioctl cmd set value write file\n");
         return ERROR;
     }
     close(fd);
@@ -783,12 +783,12 @@ int ioctl_cmd_get_value(int num, gpio_value_t* val)
     fd = open(path, FILE_FLAGS, FILE_PERMS);
     if(fd == -1)
     {
-        printf("Error: ioctl cmd set value open file\n");
+        printf("Error: ioctl cmd get value open file\n");
         return ERROR;
     }
     if(read(fd, &str_val, 1) != 1)
     {
-        printf("Error : ioctl set value write file\n");
+        printf("Error : ioctl cmd get value write file\n");
         return ERROR;
     }
     int tmp = atoi(&str_val);
