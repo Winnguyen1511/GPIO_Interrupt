@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "GPIORpi.h"
 #include <unistd.h>
-#include <sys/poll.h>
+#include <poll.h>
 
 int main(int argc, char** argv)
 {
