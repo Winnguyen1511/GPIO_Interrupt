@@ -15,7 +15,7 @@ int main(int argc, char** argv)
     // ioctl_cmd_set_active_low(17, HIGH_ACTIVE);
     // ioctl_cmd_set_value(17, HIGH);
     GPIO_t gpio17;
-    GPIO_Init_Custom(&gpio17, 17, INPUT, HIGH_ACTIVE,FALLING, LOW);
+    GPIO_Init_Custom(&gpio17, 17, INPUT, HIGH_ACTIVE,RISING, LOW);
     //ioctl_cmd(&gpio17, EXPORT_CMD, NULL);
     sleep(2);
     GPIO_get_value(&gpio17, &tmpVal);
