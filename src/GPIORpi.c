@@ -414,8 +414,9 @@ int ioctl_cmd(GPIO_t* instance, gpio_command_t cmd, void* val)
             } 
             break;
         case SET_VALUE_CMD:
-            
-            if(!ioctl_cmd_get_dir(instance->gpio_num, &tmp))
+            tmpNum = instance->gpio_num;
+            tmpNum += (int)(instance->direction) << 16;
+            if(!ioctl_cmd_get_dir(tmpNum, &tmp))
             {
                 printf("Error: Cannot detect input/output\n");
                 ret = ERROR;
