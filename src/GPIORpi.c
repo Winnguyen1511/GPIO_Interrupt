@@ -713,6 +713,7 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
         printf("Error : ioctl cmd get edge read file\n");
         return ERROR;
     }
+    printf("%s\n", str_val);
     if(strcmp(str_val, "falling") == 0)
     {
         *val = FALLING;
