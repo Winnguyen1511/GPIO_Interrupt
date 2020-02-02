@@ -36,13 +36,13 @@ int main(int argc, char** argv)
     // printf("num=%d, active_low=%d, dir=%d, value=%d\n",\
 	//         gpio17.gpio_num, gpio17.active_low, gpio17.direction, gpio17.value);
     // sleep(2);
-    struct pollfd fdset;
+    struct pollfd fdset[1];
     for(;;)
     {
-        fdset.fd = open("/sys/class/gpio/gpio17/value", O_RDWR);
-        fdset.events = POLLPRI | POLLERR;
-        fdset.revents = 0;
-        int rc = poll(&fdset, 0, 5000);
+        fdset[0].fd = open("/sys/class/gpio/gpio17/value", O_RDWR);
+        fdset[0].events = POLLPRI | POLLERR;
+        fdset[0].revents = 0;
+        int rc = poll(&fdset, 1, 5000);
         if(rc < 0)
         {
             printf("poll failed\n");
@@ -52,9 +52,9 @@ int main(int argc, char** argv)
         {
             printf(".");
         }
-        if(fdset.revents & (POLLPRI | POLLERR))
+        if(fdset[0].revents & (POLLPRI | POLLERR))
         {
-            lseek(fdset.fd, 0, SEEK_SET);
+            lseek(fdset[0].fd, 0, SEEK_SET);
             int val = 0;
             GPIO_get_value(&gpio17, &val);
             printf("interrupted %d\n", val);
