@@ -851,6 +851,7 @@ int ioctl_cmd_get_dir(int num, direction_t* val)
         printf("Error : ioctl cmd get dir write file\n");
         return ERROR;
     }
+    printf("%s\n", str_val);
     if(strcmp(str_val, "out") == 0)
     {
         *val = OUTPUT;
