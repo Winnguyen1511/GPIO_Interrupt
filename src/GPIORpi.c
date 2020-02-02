@@ -714,20 +714,20 @@ int ioctl_cmd_get_edge(int num, edge_t* val)
         return ERROR;
     }
     printf("%s\n", str_val);
-    if(strcmp(str_val, "falling") == 0)
+    if(strcmp(str_val, "falling\n") == 0)
     {
         *val = FALLING;
     }
-    else if(strcmp(str_val, "rising") == 0)
+    else if(strcmp(str_val, "rising\n") == 0)
     {
         printf("here\n");
         *val = RISING;
     }
-    else if(strcmp(str_val, "none") == 0)
+    else if(strcmp(str_val, "none\n") == 0)
     {
         *val = NONE;
     }
-    else if(strcmp(str_val, "both") == 0)
+    else if(strcmp(str_val, "both\n") == 0)
     {
         *val = BOTH;
     }
