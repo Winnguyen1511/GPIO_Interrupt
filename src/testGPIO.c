@@ -38,7 +38,7 @@ int main(int argc, char** argv)
     // printf("num=%d, active_low=%d, dir=%d, value=%d\n",\
 	//         gpio17.gpio_num, gpio17.active_low, gpio17.direction, gpio17.value);
     // sleep(2);
-
+    GPIO_EXTI_Init(&gpio17);
     //hello
     while(1)
     {

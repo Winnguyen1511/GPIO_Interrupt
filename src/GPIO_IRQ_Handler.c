@@ -8,6 +8,7 @@ int split_arg(void *arg)
 
 void* IRQ_Handler_GPIO17(void* arg)
 {
+    printf("IRQ_start\n");
     int inotifyFd, wd;
     struct inotify_event *event;
     ssize_t numReadEvent;
@@ -17,6 +18,7 @@ void* IRQ_Handler_GPIO17(void* arg)
     char buf[BUF_LEN];
     if(gpio.gpio_num == 17 && tmpDir == INPUT)
     {
+        printf("IRQ process\n");
         //if()
         inotifyFd = inotify_init();
         if (inotifyFd == -1)
@@ -37,6 +39,7 @@ void* IRQ_Handler_GPIO17(void* arg)
         GPIO_get_edge(&gpio, &tmpEdge);
         if(tmpEdge == RISING)
         {
+            printf("IRQ rising handler\n");
             for(;;)
             {
                 numReadEvent = read(inotifyFd, buf, BUF_LEN);
