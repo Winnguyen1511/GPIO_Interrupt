@@ -10,7 +10,7 @@ void* IRQ_Handler_GPIO17(void* arg)
 {
     //printf("IRQ_start\n");
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -104,7 +104,7 @@ void* IRQ_Handler_GPIO17(void* arg)
 void* IRQ_Handler_GPIO18(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -198,7 +198,7 @@ void* IRQ_Handler_GPIO18(void* arg)
 void* IRQ_Handler_GPIO27(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -292,7 +292,7 @@ void* IRQ_Handler_GPIO27(void* arg)
 void* IRQ_Handler_GPIO22(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -386,7 +386,7 @@ void* IRQ_Handler_GPIO22(void* arg)
 void* IRQ_Handler_GPIO23(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -480,7 +480,7 @@ void* IRQ_Handler_GPIO23(void* arg)
 void* IRQ_Handler_GPIO24(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -574,7 +574,7 @@ void* IRQ_Handler_GPIO24(void* arg)
 void* IRQ_Handler_GPIO25(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -668,7 +668,7 @@ void* IRQ_Handler_GPIO25(void* arg)
 void* IRQ_Handler_GPIO05(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -762,7 +762,7 @@ void* IRQ_Handler_GPIO05(void* arg)
 void* IRQ_Handler_GPIO06(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -856,7 +856,7 @@ void* IRQ_Handler_GPIO06(void* arg)
 void* IRQ_Handler_GPIO12(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -950,7 +950,7 @@ void* IRQ_Handler_GPIO12(void* arg)
 void* IRQ_Handler_GPIO13(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -1044,7 +1044,7 @@ void* IRQ_Handler_GPIO13(void* arg)
 void* IRQ_Handler_GPIO19(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -1138,7 +1138,7 @@ void* IRQ_Handler_GPIO19(void* arg)
 void* IRQ_Handler_GPIO16(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -1232,7 +1232,7 @@ void* IRQ_Handler_GPIO16(void* arg)
 void* IRQ_Handler_GPIO26(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -1326,7 +1326,7 @@ void* IRQ_Handler_GPIO26(void* arg)
 void* IRQ_Handler_GPIO20(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
@@ -1420,7 +1420,7 @@ void* IRQ_Handler_GPIO20(void* arg)
 void* IRQ_Handler_GPIO21(void* arg)
 {
     int inotifyFd, wd;
-    struct inotify_event *event;
+    
     ssize_t numReadEvent;
     GPIO_t gpio = *(GPIO_t*)arg;
     direction_t tmpDir;
