@@ -29,7 +29,7 @@ int main(int argc, char** argv)
     GPIO_get_direction(&gpio17, &tmpDir);
     printf("Value=%d, Edge=%d, Dir=%d\n", tmpVal, tmpEd, tmpDir);
     sleep(2);
-
+    
     GPIO_EXTI_Init(&gpio17);
     //hello
     while(1)

@@ -1500,8 +1500,6 @@ void* IRQ_Handler_GPIO21(void* arg)
         {       
             //do nothing   
         }
-        
-
     }
     else 
     {
@@ -1515,7 +1513,7 @@ void  GPIO_EXTI_Callback(int gpio_num)
 {
     //User code define here
     //User can define this function anywhere in user code
-    printf("Interrupted\n");
+    printf("Interrupted gpio%d\n", gpio_num);
 }
 
 int GPIO_EXTI_Init(GPIO_t* instance)
