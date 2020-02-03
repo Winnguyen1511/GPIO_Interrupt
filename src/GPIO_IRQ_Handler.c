@@ -26,6 +26,7 @@ void* IRQ_Handler_GPIO17(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
+        printf("%s\n", gpio.path);
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -59,6 +60,7 @@ void* IRQ_Handler_GPIO17(void* arg)
                 {
                     GPIO_EXTI_Callback(gpio.gpio_num);
                 }
+                previous = now;
             }
         }
         else if(tmpEdge == FALLING)
