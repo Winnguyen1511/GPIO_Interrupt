@@ -5,6 +5,16 @@
 #include <fcntl.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <pthread.h>
+#include <sys/inotify.h>
+
+//#include "GPIO_IRQ_Handler.h"
+
+#define GPIO_NUM    26
+#define PIN_NUM     40
+#define INVALID_IRQ -1
+#define GPIO_MAP_INDEX(X)               (X-2)
+#define IRQ_Handler_Array_Index(X)      (X-1)  
 
 #define FILE_FLAGS      O_RDWR
 #define FILE_PERMS      S_IRUSR | S_IWUSR
@@ -19,6 +29,7 @@
 #define ACTIVE_LOW  "/active_low"
 #define VALUE       "/value"
 #define EDGE        "/edge"
+
 #define SUCCESS     1
 #define ERROR       -1
 #define TRUE        1
@@ -47,6 +58,7 @@ typedef enum gpio_command_enum
 }gpio_command_t;
 
 typedef struct GPIO_struct{
+    char* path;
     char* name;
     int gpio_num;
     export_t export_status;
@@ -60,6 +72,7 @@ int GPIO_Init_Default(GPIO_t* instance, int number);
 int GPIO_Init_Custom(GPIO_t* instance,\
             int number, direction_t dir,\
             active_low_t act, edge_t ed, gpio_value_t initVal);
+
 int GPIO_Denit(GPIO_t* instance);
 
 int GPIO_export(GPIO_t* instance);

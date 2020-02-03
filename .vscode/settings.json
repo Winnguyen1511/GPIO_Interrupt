@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "gpiorpi.h": "c",
+        "gpio_irq_handler.h": "c"
+    }
+}

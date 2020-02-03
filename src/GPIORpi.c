@@ -13,9 +13,14 @@ int GPIO_Init_Default(GPIO_t* instance, int number)
     strcat(name, GPIO_PREFIX);
     sprintf(number_char, "%d", number);
     strcat(name, number_char);
+    //instance->name = (char*)malloc(MAX_NAME_SIZE *(sizeof(char)));
     instance->name = (char*)malloc(MAX_NAME_SIZE *(sizeof(char)));
+    instance->path = (char*)malloc(MAX_PATH_SIZE* sizeof(char));
+
+    strcpy(instance->path, GPIO_PATH);
     strcpy(instance->name, name);
-    instance->gpio_num = number;
+    strcat(instance->path, instance->name);
+    strcat(instance->path, VALUE);
 
     if(!GPIO_export(instance))
     {
@@ -57,7 +62,11 @@ int GPIO_Init_Custom(GPIO_t* instance,\
     sprintf(number_char, "%d", number);
     strcat(name, number_char);
     instance->name = (char*)malloc(MAX_NAME_SIZE *(sizeof(char)));
+    instance->path = (char*)malloc(MAX_PATH_SIZE* sizeof(char));
+    strcpy(instance->path, GPIO_PATH);
     strcpy(instance->name, name);
+    strcat(instance->path, instance->name);
+    strcat(instance->path, VALUE);
     instance->gpio_num = number;
 
     if(!GPIO_export(instance))
@@ -91,6 +100,10 @@ int GPIO_Init_Custom(GPIO_t* instance,\
     }
     return SUCCESS;
 }
+
+
+
+
 int GPIO_Denit(GPIO_t* instance)
 {
     if(instance->direction == OUTPUT)
@@ -814,6 +827,7 @@ int ioctl_cmd_get_value(int num, gpio_value_t* val)
     char str_val;
     // fprintf(str_val, "%d", (int)val);
     fd = open(path, FILE_FLAGS, FILE_PERMS);
+    lseek(fd, 0, SEEK_SET);
     if(fd == -1)
     {
         printf("Error: ioctl cmd get value open file\n");
