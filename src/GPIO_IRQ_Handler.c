@@ -1,10 +1,27 @@
 #include "GPIO_IRQ_Handler.h"
 
-int split_arg(void *arg)
-{
-    return SUCCESS;
-}
+
 #define BUF_LEN 10 * (sizeof(struct inotify_event) + 1024 + 1)
+
+int GPIO_Map[GPIO_NUM] = {
+                                    INVALID_IRQ, INVALID_IRQ, INVALID_IRQ, 29, 31, INVALID_IRQ, INVALID_IRQ, INVALID_IRQ, INVALID_IRQ,//GPIO02->10
+                                    INVALID_IRQ, 32, 33, INVALID_IRQ, INVALID_IRQ, 36, 11, 12, 35,//GPIO11->19
+                                    38, 40, 15, 16, 18, 22, 37, 13//GPIO20->26
+                                    };
+
+void *IRQ_Handler_Array[PIN_NUM] = {
+                                            NULL, NULL, NULL, NULL, //Pin 01->04
+                                            NULL, NULL, NULL, NULL, //Pin 05->08
+                                            NULL, NULL, IRQ_Handler_GPIO17, IRQ_Handler_GPIO18,//Pin 09->12
+                                            IRQ_Handler_GPIO27, NULL, IRQ_Handler_GPIO22, IRQ_Handler_GPIO23,//Pin 13->16
+                                            NULL, IRQ_Handler_GPIO24, NULL, NULL,//Pin 17->20
+                                            NULL, IRQ_Handler_GPIO25, NULL, NULL,//Pin 21->24
+                                            NULL, NULL, NULL, NULL,//Pin 25->28
+                                            IRQ_Handler_GPIO05, NULL, IRQ_Handler_GPIO06, IRQ_Handler_GPIO12,//Pin 29 -> 32
+                                            IRQ_Handler_GPIO13, NULL, IRQ_Handler_GPIO19, IRQ_Handler_GPIO16,//Pin 33->36
+                                            IRQ_Handler_GPIO26, IRQ_Handler_GPIO20, NULL, IRQ_Handler_GPIO21//Pin 37->40
+                                            };
+
 
 void* IRQ_Handler_GPIO17(void* arg)
 {
@@ -26,7 +43,7 @@ void* IRQ_Handler_GPIO17(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -120,7 +137,7 @@ void* IRQ_Handler_GPIO18(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -214,7 +231,7 @@ void* IRQ_Handler_GPIO27(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -308,7 +325,7 @@ void* IRQ_Handler_GPIO22(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -402,7 +419,7 @@ void* IRQ_Handler_GPIO23(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -496,7 +513,7 @@ void* IRQ_Handler_GPIO24(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -590,7 +607,7 @@ void* IRQ_Handler_GPIO25(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -684,7 +701,7 @@ void* IRQ_Handler_GPIO05(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -778,7 +795,7 @@ void* IRQ_Handler_GPIO06(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -872,7 +889,7 @@ void* IRQ_Handler_GPIO12(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -966,7 +983,7 @@ void* IRQ_Handler_GPIO13(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -1060,7 +1077,7 @@ void* IRQ_Handler_GPIO19(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -1154,7 +1171,7 @@ void* IRQ_Handler_GPIO16(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -1248,7 +1265,7 @@ void* IRQ_Handler_GPIO26(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -1342,7 +1359,7 @@ void* IRQ_Handler_GPIO20(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {
@@ -1436,7 +1453,7 @@ void* IRQ_Handler_GPIO21(void* arg)
             printf("Error: IRQ_Handler_GPIO17 inotify_init\n");
             return (void*)ERROR;
         }
-        printf("%s\n", gpio.path);
+        
         wd = inotify_add_watch(inotifyFd, gpio.path, IN_MODIFY | IN_OPEN);
         if (wd == -1)
         {

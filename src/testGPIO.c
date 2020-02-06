@@ -20,13 +20,13 @@ int main(int argc, char** argv)
     GPIO_get_value(&gpio17, &tmpVal);
     GPIO_get_edge(&gpio17, &tmpEd);
     GPIO_get_direction(&gpio17, &tmpDir);
-    printf("Value=%d, Edge=%d, Dir=%d\n", tmpVal, tmpEd, tmpDir);
+    printf("Num=%d, Value=%d, Edge=%d, Dir=%d\n",gpio17.gpio_num, tmpVal, tmpEd, tmpDir);
     
     sleep(2);
     GPIO_get_value(&gpio17, &tmpVal);
     GPIO_get_edge(&gpio17, &tmpEd);
     GPIO_get_direction(&gpio17, &tmpDir);
-    printf("Value=%d, Edge=%d, Dir=%d\n", tmpVal, tmpEd, tmpDir);
+    printf("Num=%d, Value=%d, Edge=%d, Dir=%d\n",gpio17.gpio_num, tmpVal, tmpEd, tmpDir);
     sleep(2);
     
     GPIO_EXTI_Init(&gpio17);
