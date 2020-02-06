@@ -1,3 +1,6 @@
+#ifndef GPIO_IRQ_HANDLER_H
+#define GPIO_IRQ_HANDLER_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -66,3 +69,5 @@ int split_arg(void *arg);
 int GPIO_EXTI_Init(GPIO_t* instance);
 
 extern void GPIO_EXTI_Callback(int gpio_num) __attribute__((weak));
+
+#endif

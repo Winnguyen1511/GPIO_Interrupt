@@ -1,3 +1,6 @@
+#ifndef GPIO_RPI_H
+#define GPIO_RPI_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -103,3 +106,5 @@ int ioctl_cmd_get_value(int num, gpio_value_t* val);
 int ioctl_cmd_get_dir(int num, direction_t* val);
 int ioctl_cmd_get_active_low(int num, active_low_t* val);
 int ioctl_cmd_get_edge(int num, edge_t* val);
+
+#endif

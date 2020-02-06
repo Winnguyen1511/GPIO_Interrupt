@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include "GPIO.h"
-//#include "GPIORpi.h"
+#include "GPIORpi.h"
 #include "GPIO_IRQ_Handler.h"
 #include <unistd.h>
 
