@@ -55,60 +55,42 @@ void* IRQ_Handler_GPIO17(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -149,60 +131,42 @@ void* IRQ_Handler_GPIO18(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -243,60 +207,42 @@ void* IRQ_Handler_GPIO27(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -337,60 +283,42 @@ void* IRQ_Handler_GPIO22(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -431,60 +359,42 @@ void* IRQ_Handler_GPIO23(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -525,60 +435,42 @@ void* IRQ_Handler_GPIO24(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -619,60 +511,42 @@ void* IRQ_Handler_GPIO25(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -713,60 +587,42 @@ void* IRQ_Handler_GPIO05(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+       for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -807,60 +663,42 @@ void* IRQ_Handler_GPIO06(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -901,60 +739,42 @@ void* IRQ_Handler_GPIO12(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -995,60 +815,42 @@ void* IRQ_Handler_GPIO13(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -1089,60 +891,42 @@ void* IRQ_Handler_GPIO19(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -1183,60 +967,42 @@ void* IRQ_Handler_GPIO16(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -1277,60 +1043,42 @@ void* IRQ_Handler_GPIO26(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -1371,60 +1119,42 @@ void* IRQ_Handler_GPIO20(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
-        else
-        {       
-            //do nothing   
-        }
-        
-
     }
     else 
     {
@@ -1465,57 +1195,41 @@ void* IRQ_Handler_GPIO21(void* arg)
         now = previous;
         edge_t tmpEdge;
         GPIO_get_edge(&gpio, &tmpEdge);
-        if(tmpEdge == RISING)
+        for(;;)
         {
-            //printf("IRQ rising handler\n");
-            for(;;)
+            numReadEvent = read(inotifyFd, buf, BUF_LEN);
+            if (numReadEvent == 0)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
+                printf("read() from inotify fd returned 0!\n");
+                return (void*)ERROR;
+            }
                 
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
+            if (numReadEvent == -1)
+            {
+                printf("Error: read\n");
                     return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
+            }
+            GPIO_get_value(&gpio, &now);
+            if(tmpEdge == RISING)
+            {
                 if(now == HIGH && previous == LOW)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
-                previous = now;
             }
-        }
-        else if(tmpEdge == FALLING)
-        {
-            for(;;)
+            else if(tmpEdge == FALLING)
             {
-                numReadEvent = read(inotifyFd, buf, BUF_LEN);
-                if (numReadEvent == 0)
-                {
-                    printf("read() from inotify fd returned 0!\n");
-                    return (void*)ERROR;
-                }
-                
-                if (numReadEvent == -1)
-                {
-                    printf("Error: read\n");
-                    return (void*)ERROR;
-                }
-                GPIO_get_value(&gpio, &now);
                 if(now == LOW && previous == HIGH)
-                {
                     GPIO_EXTI_Callback(gpio.gpio_num);
-                }
             }
-        }
-        else
-        {       
-            //do nothing   
+            else if(tmpEdge == BOTH)
+            {
+                if((now == LOW && previous == HIGH) ||
+                    (now == HIGH && previous == LOW))
+                    GPIO_EXTI_Callback(gpio.gpio_num);
+            }
+            else{
+                //do nothing
+            }
+            previous = now;
         }
     }
     else 
